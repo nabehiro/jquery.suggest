@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>sample</title>
+		<style type="text/css" media="screen">
+			.suggest
+			{
+			    position: absolute;
+			    z-index: 100;
+			    overflow: auto;
+			    background-color: #ffffff;
+			    border: 1px solid #CCCCFF;
+			    width: 200px;
+			    display: none;
+			    text-align: left;
+			    font-family: Monospace;
+			    font-size: 15px;
+			}
+			.suggest div
+			{
+			    display: block;
+			    overflow: auto;
+			    white-space: nowrap;
+			    text-align: left;
+			}
+			.suggest div.select
+			{
+			    color: #FFFFFF;
+				background-color:#3366FF;
+			}
+		</style>
+	</head>
+	<body>
+		<b>Programing Language</b>
+		<input type="text" id="txt" />
+		
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="jquery.suggest.js" type="text/javascript"></script>
+		
+		
+		<script type="text/javascript">
+			var langs = ['java', 'jquery', 'javascript', 'C#', 'ruby', 'perl', 'Basic', '謝謝', 'どうも'];
+			
+			$("#txt").suggest({
+				classSuggest: "suggest",
+				onSearch: function(word, callback) {
+					var filtered = $.grep(langs, function(lang) {
+						console.log(lang);
+						return lang.indexOf(word) > -1;
+					});
+					callback(filtered);
+				},
+				onSelect: function(word) { alert(word); }
+			});
+		</script>
+	</body>
+</html>
